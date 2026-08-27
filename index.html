@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#101828">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>UK Trip 2026 v8</title>
+<title>UK Trip 2026 v9</title>
 <style>
 :root{--bg:#f5f6f8;--card:#fff;--text:#172033;--muted:#667085;--line:#e4e7ec;--accent:#172033;--soft:#f8fafc;--ok:#15803d;--danger:#b42318}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif;padding-bottom:86px}
@@ -27,7 +27,7 @@ input,select{width:100%;border:1px solid #d0d5dd;border-radius:10px;background:w
 </style>
 </head>
 <body>
-<header><h1>🇬🇧 UK Trip 2026 v8</h1><div class="sub" id="headerSub">London → Manchester → York</div></header>
+<header><h1>🇬🇧 UK Trip 2026 v9</h1><div class="sub" id="headerSub">London → Manchester → York</div></header>
 <main>
 
 <section id="home" class="section active">
@@ -248,7 +248,11 @@ function renderHome(){
   document.getElementById("countdownSub").textContent=d.toLocaleDateString("ja-JP",{year:"numeric",month:"long",day:"numeric"});
  }else{document.getElementById("countdown").textContent="出発日を設定";document.getElementById("countdownSub").textContent="旅程 → 設定から登録できます"}
  const nowDay=localStorage.getItem("ukCurrentDay")||"1";const s=schedules[nowDay]||[];
- document.getElementById("todayBox").innerHTML=`<div class="chip">Day ${nowDay}</div>`+(s.length?s.slice(0,5).map(x=>`<div class="schedule-row"><div class="time">${x[0]}</div><div><div class="place">${x[1]}</div><div class="desc">${x[2]}</div></div>${x[3]?`<a class="linkbtn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(x[3])}">地図</a>`:""}</div>`).join(""):`<div class="notice">予定未設定</div>`;
+ const todayItems=s.length?s.slice(0,5).map(x=>{
+  const map=x[3]?`<a class="linkbtn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(x[3])}">地図</a>`:"";
+  return `<div class="schedule-row"><div class="time">${x[0]}</div><div><div class="place">${x[1]}</div><div class="desc">${x[2]}</div></div>${map}</div>`;
+}).join(""):`<div class="notice">予定未設定</div>`;
+document.getElementById("todayBox").innerHTML=`<div class="chip">Day ${nowDay}</div>${todayItems}`;
 }
 function renderSchedule(){
  const sel=document.getElementById("daySelect");if(!sel.options.length)sel.innerHTML=Array.from({length:14},(_,i)=>`<option value="${i+1}">Day ${i+1}</option>`).join("");
