@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#101828">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>UK Trip 2026 v7</title>
+<title>UK Trip 2026 v8</title>
 <style>
 :root{--bg:#f5f6f8;--card:#fff;--text:#172033;--muted:#667085;--line:#e4e7ec;--accent:#172033;--soft:#f8fafc;--ok:#15803d;--danger:#b42318}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif;padding-bottom:86px}
@@ -27,7 +27,7 @@ input,select{width:100%;border:1px solid #d0d5dd;border-radius:10px;background:w
 </style>
 </head>
 <body>
-<header><h1>🇬🇧 UK Trip 2026 v7</h1><div class="sub" id="headerSub">London → Manchester → York</div></header>
+<header><h1>🇬🇧 UK Trip 2026 v8</h1><div class="sub" id="headerSub">London → Manchester → York</div></header>
 <main>
 
 <section id="home" class="section active">
@@ -59,6 +59,15 @@ input,select{width:100%;border:1px solid #d0d5dd;border-radius:10px;background:w
 <section id="tasks" class="section">
 <div class="title">チェックリスト</div>
 <div class="small">「出発前」とDay 1〜14に分けています。チェック状態はこの端末に保存されます。</div>
+<div class="card" style="margin-top:12px">
+  <div class="title">全体の進捗</div>
+  <div class="progress"><div id="taskBar" class="bar"></div></div>
+  <div class="stats">
+    <div class="stat"><div id="taskDone" class="num">0</div><div class="lbl">完了</div></div>
+    <div class="stat"><div id="taskRemain" class="num">0</div><div class="lbl">残り</div></div>
+    <div class="stat"><div id="taskPct" class="num">0%</div><div class="lbl">進捗</div></div>
+  </div>
+</div>
 <div id="taskList" style="margin-top:12px"></div>
 </section>
 
@@ -195,15 +204,31 @@ function show(id){
 }
 function syncHash(){
   const id=location.hash.replace("#","");
-  if(id && document.getElementById(id)) show(id);
+  if(id&&document.getElementById(id)){
+    const target=document.getElementById(id);
+    document.querySelectorAll(".section").forEach(x=>x.classList.remove("active"));
+    target.classList.add("active");
+    render();
+    window.scrollTo(0,0);
+  }
 }
 function toggle(i){if(localStorage.getItem(key(i))==="1")localStorage.removeItem(key(i));else localStorage.setItem(key(i),"1");render()}
 function render(){
- let done=tasks.filter((t,i)=>localStorage.getItem(key(i))==="1").length;
- let urgent=tasks.filter((t,i)=>t[2]==="最優先"&&localStorage.getItem(key(i))!=="1").length;
- let pct=Math.round(done/tasks.length*100);
- document.getElementById("done").textContent=done;document.getElementById("remain").textContent=tasks.length-done;document.getElementById("urgent").textContent=urgent;document.getElementById("pct").textContent=pct+"%";document.getElementById("bar").style.width=pct+"%";
- renderTasks();renderHome();renderSchedule();renderReservations();renderBudget();renderSettings();
+  const done=tasks.filter((t,i)=>localStorage.getItem(key(i))==="1").length;
+  const remain=tasks.length-done;
+  const urgent=tasks.filter((t,i)=>t[2]==="最優先"&&localStorage.getItem(key(i))!=="1").length;
+  const pct=tasks.length?Math.round(done/tasks.length*100):0;
+  const set=(id,value)=>{const el=document.getElementById(id);if(el)el.textContent=value;};
+  set("done",done);set("remain",remain);set("urgent",urgent);set("pct",pct+"%");
+  const bar=document.getElementById("bar");if(bar)bar.style.width=pct+"%";
+  set("taskDone",done);set("taskRemain",remain);set("taskPct",pct+"%");
+  const taskBar=document.getElementById("taskBar");if(taskBar)taskBar.style.width=pct+"%";
+  try{renderTasks()}catch(e){console.error("renderTasks",e)}
+  try{renderHome()}catch(e){console.error("renderHome",e)}
+  try{renderSchedule()}catch(e){console.error("renderSchedule",e)}
+  try{renderReservations()}catch(e){console.error("renderReservations",e)}
+  try{renderBudget()}catch(e){console.error("renderBudget",e)}
+  try{renderSettings()}catch(e){console.error("renderSettings",e)}
 }
 function renderTasks(){
  const groups={};tasks.forEach((t,i)=>(groups[t[0]]??=[]).push({t,i}));
@@ -255,11 +280,8 @@ function saveSettings(){
 function renderSettings(){document.getElementById("departureDate").value=localStorage.getItem("ukDeparture")||"";document.getElementById("tripDays").value=localStorage.getItem("ukTripDays")||14}
 function resetApp(){if(confirm("チェック・予約・支出・設定をすべて削除します。よろしいですか？")){Object.keys(localStorage).filter(k=>k.startsWith("uk")).forEach(k=>localStorage.removeItem(k));reservations=[];expenses=[];render()}}
 function initApp(){
-  document.querySelectorAll("#appNav a").forEach(btn=>{
-    btn.addEventListener("click",()=>show(btn.dataset.page,btn));
-  });
   const daySelect=document.getElementById("daySelect");
-  if(daySelect) daySelect.addEventListener("change",e=>{
+  if(daySelect)daySelect.addEventListener("change",e=>{
     localStorage.setItem("ukCurrentDay",e.target.value);
     renderSchedule();renderHome();
   });
