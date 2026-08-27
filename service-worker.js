@@ -1,6 +1,6 @@
-const CACHE="uk-trip-v5";
+const CACHE="uk-trip-v7";
 self.addEventListener("install",e=>e.waitUntil(
-  caches.open(CACHE).then(c=>c.addAll(["./","./index.html","./manifest.json"]))
+  caches.open(CACHE).then(c=>c.addAll(["./","./index.html?v=7","./manifest.json"]))
 ));
 self.addEventListener("activate",e=>e.waitUntil(
   caches.keys().then(keys=>Promise.all(
