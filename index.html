@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#101828">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>UK Trip 2026 v11</title>
+<style>
+:root{--bg:#f5f6f8;--card:#fff;--text:#172033;--muted:#667085;--line:#e4e7ec;--accent:#172033;--soft:#f8fafc;--ok:#15803d;--danger:#b42318}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif;padding-bottom:86px}
+header{background:#101828;color:white;padding:calc(18px + env(safe-area-inset-top)) 18px 18px;position:sticky;top:0;z-index:20}h1{margin:0;font-size:24px}.sub{opacity:.72;font-size:12px;margin-top:4px}
+main{max-width:760px;margin:auto;padding:14px}.section{display:none}.section.active{display:block}.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:15px;margin-bottom:12px;box-shadow:0 2px 8px #10182808}.title{font-size:17px;font-weight:700;margin:3px 0 12px}.small{font-size:12px;color:var(--muted)}.muted{color:var(--muted)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.stat{background:var(--soft);border-radius:12px;padding:10px;text-align:center}.num{font-size:21px;font-weight:700}.lbl{font-size:11px;color:var(--muted)}
+.progress{height:9px;background:#eaecf0;border-radius:99px;overflow:hidden;margin:10px 0}.bar{height:100%;background:#172033;border-radius:99px;width:0}
+.day{border-left:3px solid #172033;padding-left:12px;margin:15px 0}.day:first-child{margin-top:0}.day h3{margin:0 0 7px;font-size:15px}.route{font-size:13px;line-height:1.65}.note{font-size:12px;color:var(--muted);margin-top:5px}
+.item{display:flex;gap:10px;align-items:flex-start;padding:11px 0;border-bottom:1px solid var(--line)}.item:last-child{border-bottom:0}.item input{width:21px;height:21px;accent-color:#172033;margin-top:1px}.item.done .label{text-decoration:line-through;color:#98a2b3}.label{font-size:14px;line-height:1.45;flex:1}.meta{font-size:11px;color:var(--muted);margin-top:3px}.tag{display:inline-block;font-size:10px;border-radius:99px;padding:3px 7px;background:#eef2f6;margin-left:5px}.high{background:#fff1f2;color:#be123c}.mid{background:#fff7ed;color:#c2410c}.low{background:#f0fdf4;color:#15803d}
+nav{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--line);display:flex;justify-content:center;z-index:30;padding-bottom:env(safe-area-inset-bottom)}nav a{flex:1;max-width:150px;border:0;background:none;padding:9px 3px;color:var(--muted);font-size:10px;text-align:center;text-decoration:none}nav a:focus,nav a:hover{color:var(--text)}.section:target{display:block}
+button{font:inherit}button.primary{background:#172033;color:#fff;border:0;border-radius:10px;padding:9px 12px;font-weight:600}button.secondary{background:#fff;border:1px solid var(--line);border-radius:10px;padding:9px 12px}.row{display:flex;gap:8px;flex-wrap:wrap}.row>*{flex:1;min-width:120px}
+input,select{width:100%;border:1px solid #d0d5dd;border-radius:10px;background:white;padding:10px;font-size:14px;color:var(--text)}label{font-size:12px;color:var(--muted);display:block;margin:10px 0 5px}
+.notice{background:var(--soft);border-radius:12px;padding:12px;font-size:13px;line-height:1.55}.danger{color:var(--danger)}.success{color:var(--ok)}
+.linkbtn{display:inline-block;text-decoration:none;background:#fff;border:1px solid var(--line);border-radius:9px;padding:7px 9px;color:var(--text);font-size:12px;margin-top:6px}
+.schedule-row{display:grid;grid-template-columns:64px 1fr auto;gap:9px;padding:11px 0;border-bottom:1px solid var(--line);align-items:start}.schedule-row:last-child{border-bottom:0}.time{font-weight:700}.place{font-size:14px;font-weight:600}.desc{font-size:11px;color:var(--muted);margin-top:3px}
+.amount{font-size:18px;font-weight:700}.yen{font-size:12px;color:var(--muted)}
+.hidden{display:none!important}.chip{display:inline-block;border-radius:99px;background:#eef2f6;padding:5px 8px;font-size:11px;margin:2px}
+</style>
+</head>
+<body>
+<header><h1>🇬🇧 UK Trip 2026 v11</h1><div class="sub" id="headerSub">London → Manchester → York</div></header>
+<main>
+
+<section id="home" class="section active">
+<div class="card">
+  <div class="title">出発まで</div>
+  <div id="countdown" style="font-size:30px;font-weight:800">出発日を設定</div>
+  <div id="countdownSub" class="small">ホーム → 設定から出発日を登録できます</div>
+</div>
+<div class="card">
+  <div class="title">準備の進捗</div>
+  <div class="progress"><div id="bar" class="bar"></div></div>
+  <div id="pct" class="small">0%</div>
+  <div class="stats" style="margin-top:12px">
+    <div class="stat"><div id="done" class="num">0</div><div class="lbl">完了</div></div>
+    <div class="stat"><div id="remain" class="num">0</div><div class="lbl">残り</div></div>
+    <div class="stat"><div id="urgent" class="num">0</div><div class="lbl">最優先</div></div>
+  </div>
+</div>
+<div class="card">
+  <div class="title">今日の予定</div>
+  <div id="todayBox"></div>
+</div>
+<div class="card">
+  <div class="title">今回の旅の軸</div>
+  <div class="notice">最初の3日は詰め込みすぎず英国・ロンドンに慣れる。Stamford Bridgeは固定イベント候補。大英博物館はまず3時間程度、面白ければ延長。Manchesterにも滞在し、Yorkも候補。</div>
+</div>
+</section>
+
+<section id="tasks" class="section">
+<div class="title">チェックリスト</div>
+<div class="small">「出発前」とDay 1〜14に分けています。チェック状態はこの端末に保存されます。</div>
+<div class="card" style="margin-top:12px">
+  <div class="title">全体の進捗</div>
+  <div class="progress"><div id="taskBar" class="bar"></div></div>
+  <div class="stats">
+    <div class="stat"><div id="taskDone" class="num">0</div><div class="lbl">完了</div></div>
+    <div class="stat"><div id="taskRemain" class="num">0</div><div class="lbl">残り</div></div>
+    <div class="stat"><div id="taskPct" class="num">0%</div><div class="lbl">進捗</div></div>
+  </div>
+</div>
+<div id="taskList" style="margin-top:12px"></div>
+</section>
+
+<section id="schedule" class="section">
+<div class="title">日別スケジュール</div>
+<div class="row" style="margin-bottom:10px"><select id="daySelect" onchange="renderSchedule()"></select></div>
+<div class="card" id="scheduleList"></div>
+<div class="card">
+  <div class="title">時間はあとから変更可能</div>
+  <div class="notice">今は「仮の旅程」。実際の予約時間が決まったら、このアプリの予定も合わせて更新できます。</div>
+</div>
+</section>
+
+<section id="reservations" class="section">
+<div class="title">予約・重要情報</div>
+<div class="card">
+  <div class="title">予約一覧</div>
+  <div id="reservationList"></div>
+</div>
+<div class="card">
+  <div class="title">新しい予約を追加</div>
+  <label>種類</label><input id="rType" placeholder="ホテル / 鉄道 / ツアー / 航空券">
+  <label>名称</label><input id="rName" placeholder="例：Stamford Bridge Stadium Tour">
+  <label>日時</label><input id="rDate" type="datetime-local">
+  <label>メモ</label><input id="rMemo" placeholder="予約番号など（個人情報は最小限に）">
+  <div class="row" style="margin-top:10px"><button class="primary" onclick="addReservation()">予約を追加</button></div>
+</div>
+</section>
+
+<section id="budget" class="section">
+<div class="title">予算・ポンド換算</div>
+<div class="card">
+  <div class="title">為替レート</div>
+  <div class="row">
+    <div><label>£1 =</label><input id="rate" type="number" inputmode="decimal" step="0.01" onchange="saveRate();renderBudget()">円</div>
+    <div><label>計算</label><input id="gbpInput" type="number" inputmode="decimal" placeholder="£20" oninput="renderBudget()"></div>
+  </div>
+  <div style="margin-top:10px"><b id="gbpResult">£20 ≒ —円</b></div>
+  <div class="small">為替は変動するので、旅行前に実勢レートへ更新してください。</div>
+</div>
+<div class="card">
+  <div class="title">支出メモ</div>
+  <div class="row">
+    <input id="expenseName" placeholder="例：昼食">
+    <input id="expenseGbp" type="number" inputmode="decimal" placeholder="£">
+    <button class="primary" style="flex:0 0 auto" onclick="addExpense()">追加</button>
+  </div>
+  <div id="expenseList" style="margin-top:8px"></div>
+  <div style="margin-top:10px"><b>合計：<span id="expenseTotal">£0</span></b> <span id="expenseYen" class="yen"></span></div>
+</div>
+</section>
+
+<section id="trip" class="section">
+<div class="title">2週間プラン</div>
+<div class="card">
+<div class="day"><h3>Day 1〜3 — London / 慣れる期間</h3><div class="route">Gatwick到着 → 宿 → 周辺散歩 → Westminster等 → Chelsea / Stamford Bridge</div></div>
+<div class="day"><h3>Day 4〜7 — London / 観光</h3><div class="route">大英博物館 → 東側 → Kensington / Notting Hill → 自由日</div></div>
+<div class="day"><h3>Day 8〜10 — Manchester</h3><div class="route">移動 → Manchester中心部 → Old Trafford / 必要ならEtihad → 自由日</div></div>
+<div class="day"><h3>Day 11〜12 — York</h3><div class="route">Manchester → York → York Minster / The Shambles / 旧市街</div></div>
+<div class="day"><h3>Day 13〜14 — London / 帰国</h3><div class="route">Londonへ戻る → 自由時間 → Gatwickから帰国</div></div>
+</div>
+<div class="card">
+<div class="title">設定</div>
+<label>出発日</label><input id="departureDate" type="date" onchange="saveSettings()">
+<label>旅行日数</label><input id="tripDays" type="number" min="1" max="30" onchange="saveSettings()">
+<div class="row" style="margin-top:10px"><button class="primary" onclick="saveSettings()">保存</button><button class="secondary" onclick="resetApp()">アプリデータをリセット</button></div>
+<div class="small" style="margin-top:8px">チェック状態・予約・支出・設定はこのiPhoneのブラウザ内に保存されます。</div>
+</div>
+<div class="card">
+<div class="title">旅行中モード</div>
+<div class="notice">旅行中は「今日の予定」と「チェックリスト」を中心に使う想定。住所や施設名の「地図」ボタンからGoogle Mapsを開けます。</div>
+</div>
+</section>
+
+</main>
+<nav id="appNav">
+<a href="#home">⌂<br>ホーム</a>
+<a href="#tasks">✓<br>タスク</a>
+<a href="#schedule">◷<br>予定</a>
+<a href="#reservations">🎟<br>予約</a>
+<a href="#budget">£<br>予算</a>
+<a href="#trip">⚙<br>旅程</a>
+</nav>
+
+<script>
+/* v10: remove old PWA/service-worker caches so an older broken build cannot
+   overwrite the current page. The app does not require a service worker. */
+if("serviceWorker" in navigator){
+  navigator.serviceWorker.getRegistrations().then(rs=>rs.forEach(r=>r.unregister())).catch(()=>{});
+}
+if("caches" in window){
+  caches.keys().then(keys=>Promise.all(keys.map(k=>caches.delete(k)))).catch(()=>{});
+}
+</script>
+<script>
+const tasks=[
+["出発前","ETA取得","最優先",""],["出発前","パスポート有効期限確認","最優先",""],["出発前","海外旅行保険確認","最優先",""],["出発前","航空券・宿泊予約を保存","高",""],["出発前","eSIM準備","高",""],["出発前","クレジットカード複数枚を準備","高",""],["出発前","現金を少額用意","中",""],["出発前","Google Maps等に場所を保存","中",""],["出発前","Gatwick→Londonの移動方法確認","高",""],["出発前","帰国時のGatwickへの移動方法確認","高",""],["出発前","ロンドンの宿泊先","最優先","Victoria周辺を第一候補"],["出発前","Stamford Bridge Stadium Tour予約","最優先",""],["出発前","Manchesterの宿","高",""],["出発前","Yorkの宿","高",""],["出発前","London→Manchesterの鉄道","高",""],["出発前","Manchester→Yorkの鉄道","中",""],["出発前","York→Londonの鉄道","高",""],["出発前","Manchester United / Cityのスタジアムツアー","中",""],["出発前","Bath / Oxfordの交通","低","行く場合"],
+["Day 1","Gatwick到着・入国・荷物受取","最優先",""],["Day 1","Gatwick→London移動","最優先",""],["Day 1","宿に荷物を預ける","最優先",""],["Day 1","eSIM・交通系決済を確認","高",""],["Day 1","周辺を散歩・スーパー確認","中",""],["Day 1","無理せず早めに休む","高",""],
+["Day 2","Buckingham Palace","高",""],["Day 2","Westminster / Big Ben","高",""],["Day 2","St James's Park","中",""],["Day 2","Trafalgar Square","中",""],["Day 2","Soho / Chinatown","中",""],
+["Day 3","Kensington周辺","中",""],["Day 3","Stamford Bridge Stadium Tour","最優先","予約時間に合わせる"],["Day 3","Chelsea Megastore","高",""],["Day 3","Fulham / Chelsea周辺散策","中",""],
+["Day 4","大英博物館","高","まず3時間程度。面白ければ延長"],["Day 4","Covent Garden","中",""],["Day 4","Leicester Square","中",""],["Day 4","Chinatown / Soho","中",""],
+["Day 5","St Paul's Cathedral","中",""],["Day 5","Millennium Bridge","中",""],["Day 5","Borough Market","高",""],["Day 5","Tower of London","高",""],["Day 5","Tower Bridge","高",""],
+["Day 6","Notting Hill","中",""],["Day 6","Kensington / Hyde Park","中",""],["Day 6","Natural History Museum","中",""],
+["Day 7","ロンドン自由日","高","再訪・買い物・休養"],["Day 7","パブに行く","中",""],
+["Day 8","London→Manchester移動","高",""],["Day 8","Manchester中心部散策","高",""],["Day 8","Northern Quarter","中",""],["Day 8","パブに行く","中",""],
+["Day 9","Old Trafford / Manchester United","高",""],["Day 9","Manchester United Museum","中",""],["Day 9","Manchester市街散策","中",""],
+["Day 10","Manchester自由日","高",""],["Day 10","Etihad Stadium","中",""],["Day 10","Manchester Museum / Science and Industry Museum","低",""],
+["Day 11","Manchester→York移動","中",""],["Day 11","York Minster","高",""],["Day 11","The Shambles","高",""],["Day 11","York旧市街散策","中",""],
+["Day 12","York城壁","中",""],["Day 12","York旧市街・自由散策","中",""],["Day 12","York→London移動","高",""],
+["Day 13","London自由日","高","行き残した場所・再訪・買い物"],["Day 13","帰国準備","高",""],["Day 14","Gatwickへ移動","最優先",""],["Day 14","帰国便チェックイン","最優先",""],["Day 14","忘れ物・パスポート確認","最優先",""]
+];
+
+const schedules={
+1:[["06:30","Gatwick","到着・入国・荷物受取","Gatwick"],["09:00","Londonへ移動","宿へ向かう","London Victoria"],["11:00","宿","荷物を預ける・休憩",""],["13:00","周辺散歩","スーパー・飲食店などを把握",""],["18:00","夕食","無理せず早めに休む",""]],
+2:[["10:00","Buckingham Palace","王道観光","Buckingham Palace"],["11:30","Westminster / Big Ben","周辺散策","Big Ben London"],["13:00","昼食","現地で決める",""],["14:30","St James's Park","散歩","St James's Park London"],["16:00","Trafalgar Square","","Trafalgar Square London"],["18:00","Soho / Chinatown","夕食・街歩き","Soho London"]],
+3:[["10:00","Kensington","ゆっくり散策","Kensington London"],["12:30","昼食","Chelsea方面へ",""],["14:00","Stamford Bridge Tour","予約時間に合わせて変更","Stamford Bridge London"],["16:00","Chelsea Megastore","買い物","Chelsea FC Stamford Bridge"],["17:00","Fulham / Chelsea","周辺散策","Fulham London"]],
+4:[["10:00","大英博物館","まず約3時間。面白ければ延長","British Museum London"],["13:00","昼食","博物館周辺",""],["14:00","Covent Garden","街歩き","Covent Garden London"],["16:00","Leicester Square","","Leicester Square London"],["17:00","Chinatown / Soho","夕食","Chinatown London"]],
+5:[["10:00","St Paul's Cathedral","","St Paul's Cathedral London"],["11:30","Millennium Bridge","","Millennium Bridge London"],["12:00","Borough Market","昼食","Borough Market London"],["14:00","Tower of London","","Tower of London"],["16:00","Tower Bridge","","Tower Bridge London"],["18:00","Thames","夕方散策",""]],
+6:[["10:00","Notting Hill","","Notting Hill London"],["12:00","昼食","",""],["13:00","Kensington / Hyde Park","","Hyde Park London"],["15:00","Natural History Museum","興味があれば","Natural History Museum London"]],
+7:[["10:00","自由時間","再訪・買い物・休養",""],["18:00","パブ","英国らしい夜を1回入れる",""]],
+8:[["09:00","London→Manchester","鉄道移動",""],["12:00","Manchester中心部","チェックイン・昼食","Manchester UK"],["14:00","Northern Quarter","散策","Northern Quarter Manchester"],["18:00","夕食 / パブ","",""]],
+9:[["10:00","Old Trafford","スタジアムツアー等","Old Trafford Manchester"],["13:00","昼食","",""],["14:00","Manchester United Museum","","Manchester United Museum"],["16:00","Manchester市街","","Manchester UK"]],
+10:[["10:00","Manchester自由日","余裕を持つ",""],["14:00","Etihad Stadium","行く場合","Etihad Stadium Manchester"]],
+11:[["09:30","Manchester→York","鉄道移動",""],["12:00","York Minster","","York Minster UK"],["14:00","The Shambles","","The Shambles York"],["16:00","York旧市街","","York UK"]],
+12:[["10:00","York城壁","","York City Walls"],["12:00","旧市街・自由散策","","York UK"],["15:00","York→London","鉄道移動",""]],
+13:[["10:00","London自由日","行き残した場所・再訪・買い物","London UK"],["16:00","帰国準備","荷物・空港までの移動を確認",""]],
+14:[["07:00","Gatwickへ移動","時間は帰国便に合わせて変更","Gatwick Airport"],["","","帰国便・チェックイン","Gatwick Airport"]]
+};
+
+let reservations=JSON.parse(localStorage.getItem("ukReservations")||"[]");
+let expenses=JSON.parse(localStorage.getItem("ukExpenses")||"[]");
+
+function key(i){return "ukTask_"+i}
+function getRate(){return Number(localStorage.getItem("ukRate")||195)}
+function saveRate(){localStorage.setItem("ukRate",document.getElementById("rate").value||195)}
+function show(id,btn){
+  const target=document.getElementById(id);
+  if(!target)return;
+  document.querySelectorAll(".section").forEach(x=>x.classList.remove("active"));
+  target.classList.add("active");
+  document.querySelectorAll("nav button").forEach(x=>x.classList.remove("active"));
+  if(btn)btn.classList.add("active");
+  window.scrollTo(0,0);
+  // Render only the requested view. This prevents one broken secondary view
+  // from taking down the entire app.
+  try{
+    if(id==="home")renderHome();
+    else if(id==="tasks")renderTasks();
+    else if(id==="schedule")renderSchedule();
+    else if(id==="reservations")renderReservations();
+    else if(id==="budget")renderBudget();
+    else if(id==="trip")renderSettings();
+  }catch(e){console.error("view render error",id,e)}
+}
+function toggle(i){if(localStorage.getItem(key(i))==="1")localStorage.removeItem(key(i));else localStorage.setItem(key(i),"1");render()}
+function render(){
+  const done=tasks.filter((t,i)=>localStorage.getItem(key(i))==="1").length;
+  const remain=tasks.length-done;
+  const urgent=tasks.filter((t,i)=>t[2]==="最優先"&&localStorage.getItem(key(i))!=="1").length;
+  const pct=tasks.length?Math.round(done/tasks.length*100):0;
+  const set=(id,value)=>{const el=document.getElementById(id);if(el)el.textContent=value;};
+  set("done",done);set("remain",remain);set("urgent",urgent);set("pct",pct+"%");
+  const bar=document.getElementById("bar");if(bar)bar.style.width=pct+"%";
+  set("taskDone",done);set("taskRemain",remain);set("taskPct",pct+"%");
+  const taskBar=document.getElementById("taskBar");if(taskBar)taskBar.style.width=pct+"%";
+  try{renderTasks()}catch(e){console.error("renderTasks",e)}
+  try{renderHome()}catch(e){console.error("renderHome",e)}
+  try{renderSchedule()}catch(e){console.error("renderSchedule",e)}
+  try{renderReservations()}catch(e){console.error("renderReservations",e)}
+  try{renderBudget()}catch(e){console.error("renderBudget",e)}
+  try{renderSettings()}catch(e){console.error("renderSettings",e)}
+}
+function renderTasks(){
+ const groups={};
+ tasks.forEach((t,i)=>{
+   if(!groups[t[0]])groups[t[0]]=[];
+   groups[t[0]].push({t,i});
+ });
+ const order=["出発前",...Array.from({length:14},(_,i)=>`Day ${i+1}`)];
+ document.getElementById("taskList").innerHTML=order.filter(g=>groups[g]).map(g=>{
+  const items=groups[g],dc=items.filter(x=>localStorage.getItem(key(x.i))==="1").length;
+  return `<div class="card"><div class="title" style="display:flex;justify-content:space-between"><span>${g}</span><span class="small">${dc}/${items.length}</span></div>`+
+  items.map(({t,i})=>{let d=localStorage.getItem(key(i))==="1",cls=t[2]==="最優先"?"high":t[2]==="高"?"mid":"low";return `<div class="item ${d?"done":""}"><input type="checkbox" ${d?"checked":""} onchange="toggle(${i})"><div class="label"><b>${t[1]}</b><span class="tag ${cls}">${t[2]}</span>${t[3]?`<div class="meta">${t[3]}</div>`:""}</div></div>`}).join("")+
+  `</div>`;
+ }).join("");
+}
+function renderHome(){
+ const dep=localStorage.getItem("ukDeparture");
+ if(dep){
+  const d=new Date(dep+"T00:00:00"),now=new Date();let days=Math.ceil((d-now)/(86400000));
+  document.getElementById("countdown").textContent=days>0?`あと ${days} 日`:days===0?"今日出発":`出発済み ${Math.abs(days)} 日`;
+  document.getElementById("countdownSub").textContent=d.toLocaleDateString("ja-JP",{year:"numeric",month:"long",day:"numeric"});
+ }else{document.getElementById("countdown").textContent="出発日を設定";document.getElementById("countdownSub").textContent="旅程 → 設定から登録できます"}
+ const nowDay=localStorage.getItem("ukCurrentDay")||"1";const s=schedules[nowDay]||[];
+ const todayItems=s.length?s.slice(0,5).map(x=>{
+  const map=x[3]?`<a class="linkbtn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(x[3])}">地図</a>`:"";
+  return `<div class="schedule-row"><div class="time">${x[0]}</div><div><div class="place">${x[1]}</div><div class="desc">${x[2]}</div></div>${map}</div>`;
+}).join(""):`<div class="notice">予定未設定</div>`;
+document.getElementById("todayBox").innerHTML=`<div class="chip">Day ${nowDay}</div>${todayItems}`;
+}
+function renderSchedule(){
+ const sel=document.getElementById("daySelect");if(!sel.options.length)sel.innerHTML=Array.from({length:14},(_,i)=>`<option value="${i+1}">Day ${i+1}</option>`).join("");
+ const d=localStorage.getItem("ukCurrentDay")||sel.value||"1";sel.value=d;
+ const s=schedules[d]||[];
+ document.getElementById("scheduleList").innerHTML=s.map(x=>`<div class="schedule-row"><div class="time">${x[0]||"—"}</div><div><div class="place">${x[1]}</div><div class="desc">${x[2]}</div></div>${x[3]?`<a class="linkbtn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(x[3])}">地図</a>`:""}</div>`).join("");
+}
+function renderReservations(){
+ document.getElementById("reservationList").innerHTML=reservations.length?reservations.map((r,i)=>`<div class="item"><div class="label"><b>${r.name}</b><div class="meta">${r.type||"予約"}${r.date?" · "+new Date(r.date).toLocaleString("ja-JP"):""}</div>${r.memo?`<div class="meta">${r.memo}</div>`:""}<button class="secondary" style="margin-top:7px" onclick="deleteReservation(${i})">削除</button></div></div>`).join(""):`<div class="notice">まだ登録されていません。</div>`;
+}
+function addReservation(){
+ const name=document.getElementById("rName").value.trim();if(!name)return;
+ reservations.push({type:document.getElementById("rType").value,date:document.getElementById("rDate").value,name,memo:document.getElementById("rMemo").value});
+ localStorage.setItem("ukReservations",JSON.stringify(reservations));["rType","rName","rDate","rMemo"].forEach(id=>document.getElementById(id).value="");render();
+}
+function deleteReservation(i){reservations.splice(i,1);localStorage.setItem("ukReservations",JSON.stringify(reservations));render()}
+function renderBudget(){
+ const rate=getRate();document.getElementById("rate").value=rate;const gbp=Number(document.getElementById("gbpInput").value||20);
+ document.getElementById("gbpResult").textContent=`£${gbp.toFixed(2)} ≒ ¥${Math.round(gbp*rate).toLocaleString()}`;
+ let total=expenses.reduce((a,e)=>a+Number(e.gbp),0);document.getElementById("expenseTotal").textContent=`£${total.toFixed(2)}`;document.getElementById("expenseYen").textContent=`（約¥${Math.round(total*rate).toLocaleString()}）`;
+ document.getElementById("expenseList").innerHTML=expenses.map((e,i)=>`<div class="item"><div class="label"><b>${e.name}</b><div class="meta">£${Number(e.gbp).toFixed(2)} / 約¥${Math.round(Number(e.gbp)*rate).toLocaleString()}</div></div><button class="secondary" onclick="deleteExpense(${i})">削除</button></div>`).join("");
+}
+function addExpense(){let n=document.getElementById("expenseName").value.trim(),g=Number(document.getElementById("expenseGbp").value);if(!n||!g)return;expenses.push({name:n,gbp:g});localStorage.setItem("ukExpenses",JSON.stringify(expenses));document.getElementById("expenseName").value="";document.getElementById("expenseGbp").value="";render()}
+function deleteExpense(i){expenses.splice(i,1);localStorage.setItem("ukExpenses",JSON.stringify(expenses));render()}
+function saveSettings(){
+ const d=document.getElementById("departureDate").value,days=document.getElementById("tripDays").value||14;
+ if(d)localStorage.setItem("ukDeparture",d);localStorage.setItem("ukTripDays",days);render();
+}
+function renderSettings(){document.getElementById("departureDate").value=localStorage.getItem("ukDeparture")||"";document.getElementById("tripDays").value=localStorage.getItem("ukTripDays")||14}
+function resetApp(){if(confirm("チェック・予約・支出・設定をすべて削除します。よろしいですか？")){Object.keys(localStorage).filter(k=>k.startsWith("uk")).forEach(k=>localStorage.removeItem(k));reservations=[];expenses=[];render()}}
+function initApp(){
+  const daySelect=document.getElementById("daySelect");
+  if(daySelect)daySelect.addEventListener("change",e=>{
+    localStorage.setItem("ukCurrentDay",e.target.value);
+    try{renderSchedule()}catch(e){console.error(e)}
+    try{renderHome()}catch(e){console.error(e)}
+  });
+  render();
+}
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",initApp);
+else initApp();
+</script>
+</body>
+</html>
