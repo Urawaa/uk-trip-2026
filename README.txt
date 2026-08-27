@@ -1,2 +1,2 @@
-UK Trip 2026 v15
-Made the 7-item bottom navigation horizontally scrollable on iPhone and added a Home packing shortcut.
+UK Trip 2026 v16
+Bottom navigation changed to two fixed rows (4 items + 3 items), eliminating horizontal scrolling.
