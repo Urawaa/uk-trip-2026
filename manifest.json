@@ -1,9 +1,0 @@
-{
-  "name": "UK Trip 2026",
-  "short_name": "UK Trip",
-  "start_url": "./index.html?v=9",
-  "display": "standalone",
-  "background_color": "#f5f6f8",
-  "theme_color": "#101828",
-  "lang": "ja"
-}
