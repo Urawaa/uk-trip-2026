@@ -134,13 +134,13 @@ input,select{width:100%;border:1px solid #d0d5dd;border-radius:10px;background:w
 </section>
 
 </main>
-<nav>
-<button class="active" onclick="show('home',this)">⌂<br>ホーム</button>
-<button onclick="show('tasks',this)">✓<br>タスク</button>
-<button onclick="show('schedule',this)">◷<br>予定</button>
-<button onclick="show('reservations',this)">🎟<br>予約</button>
-<button onclick="show('budget',this)">£<br>予算</button>
-<button onclick="show('trip',this)">⚙<br>旅程</button>
+<nav id="appNav">
+<button class="active" data-page="home">⌂<br>ホーム</button>
+<button data-page="tasks">✓<br>タスク</button>
+<button data-page="schedule">◷<br>予定</button>
+<button data-page="reservations">🎟<br>予約</button>
+<button data-page="budget">£<br>予算</button>
+<button data-page="trip">⚙<br>旅程</button>
 </nav>
 
 <script>
@@ -184,7 +184,15 @@ let expenses=JSON.parse(localStorage.getItem("ukExpenses")||"[]");
 function key(i){return "ukTask_"+i}
 function getRate(){return Number(localStorage.getItem("ukRate")||195)}
 function saveRate(){localStorage.setItem("ukRate",document.getElementById("rate").value||195)}
-function show(id,btn){document.querySelectorAll(".section").forEach(x=>x.classList.remove("active"));document.getElementById(id).classList.add("active");document.querySelectorAll("nav button").forEach(x=>x.classList.remove("active"));btn.classList.add("active");window.scrollTo(0,0);render()}
+function show(id,btn){
+  const target=document.getElementById(id);
+  if(!target)return;
+  document.querySelectorAll(".section").forEach(x=>x.classList.remove("active"));
+  target.classList.add("active");
+  document.querySelectorAll("#appNav button").forEach(x=>x.classList.toggle("active",x===btn));
+  window.scrollTo(0,0);
+  render();
+}
 function toggle(i){if(localStorage.getItem(key(i))==="1")localStorage.removeItem(key(i));else localStorage.setItem(key(i),"1");render()}
 function render(){
  let done=tasks.filter((t,i)=>localStorage.getItem(key(i))==="1").length;
@@ -242,8 +250,19 @@ function saveSettings(){
 }
 function renderSettings(){document.getElementById("departureDate").value=localStorage.getItem("ukDeparture")||"";document.getElementById("tripDays").value=localStorage.getItem("ukTripDays")||14}
 function resetApp(){if(confirm("チェック・予約・支出・設定をすべて削除します。よろしいですか？")){Object.keys(localStorage).filter(k=>k.startsWith("uk")).forEach(k=>localStorage.removeItem(k));reservations=[];expenses=[];render()}}
-document.getElementById("daySelect").addEventListener("change",e=>{localStorage.setItem("ukCurrentDay",e.target.value);renderSchedule();renderHome()});
-render();
+function initApp(){
+  document.querySelectorAll("#appNav button").forEach(btn=>{
+    btn.addEventListener("click",()=>show(btn.dataset.page,btn));
+  });
+  const daySelect=document.getElementById("daySelect");
+  if(daySelect) daySelect.addEventListener("change",e=>{
+    localStorage.setItem("ukCurrentDay",e.target.value);
+    renderSchedule();renderHome();
+  });
+  render();
+}
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",initApp);
+else initApp();
 </script>
 </body>
 </html>
