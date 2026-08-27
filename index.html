@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#101828">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>UK Trip 2026 v12</title>
+<title>UK Trip 2026 v13</title>
 <style>
 :root{--bg:#f5f6f8;--card:#fff;--text:#172033;--muted:#667085;--line:#e4e7ec;--accent:#172033;--soft:#f8fafc;--ok:#15803d;--danger:#b42318}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif;padding-bottom:86px}
@@ -27,7 +27,7 @@ input,select{width:100%;border:1px solid #d0d5dd;border-radius:10px;background:w
 </style>
 </head>
 <body>
-<header><h1>🇬🇧 UK Trip 2026 v12</h1><div class="sub" id="headerSub">London → Manchester → York</div></header>
+<header><h1>🇬🇧 UK Trip 2026 v13</h1><div class="sub" id="headerSub">London → Manchester → York</div></header>
 <main>
 
 <section id="home" class="section active">
@@ -120,6 +120,13 @@ input,select{width:100%;border:1px solid #d0d5dd;border-radius:10px;background:w
 </div>
 </section>
 
+<section id="packing" class="section">
+<div class="hero"><div class="eyebrow">PACKING</div><h1>持ち物リスト</h1><div class="small">2週間のイギリス旅行を想定。<b>必須</b>だけチェックできます。</div></div>
+<div class="card"><div class="title">必須</div><div class="small">忘れると困るもの。チェック状態はこの端末に保存されます。</div></div>
+<div id="packingList"></div>
+<div class="card" style="margin-top:16px"><div class="title">できれば</div><div class="small">あると便利なもの。チェックリストにはしていません。</div></div>
+<div id="packingOptional"></div>
+</section>
 <section id="trip" class="section">
 <div class="title">2週間プラン</div>
 <div class="card">
@@ -219,10 +226,38 @@ function show(id,btn){
     else if(id==="schedule")renderSchedule();
     else if(id==="reservations")renderReservations();
     else if(id==="budget")renderBudget();
+    else if(id==="packing"){renderPacking();renderOptionalPacking();}
     else if(id==="trip")renderSettings();
   }catch(e){console.error("view render error",id,e)}
 }
 function toggle(i){if(localStorage.getItem(key(i))==="1")localStorage.removeItem(key(i));else localStorage.setItem(key(i),"1");render()}
+
+const packingRequired=[
+["書類・お金","パスポート"],["書類・お金","航空券・予約情報"],["書類・お金","ETA"],["書類・お金","クレジットカード"],["書類・お金","現金（少額の£）"],["書類・お金","スマートフォン"],["書類・お金","海外旅行保険の情報"],["書類・お金","パスポートのコピー／写真"],
+["電子機器","スマホ充電器"],["電子機器","モバイルバッテリー"],["電子機器","イギリス用変換プラグ（BFタイプ）"],["電子機器","充電ケーブル"],["電子機器","イヤホン"],
+["衣類","Tシャツ・シャツ ×5〜7"],["衣類","下着 ×7〜8"],["衣類","靴下 ×7〜8"],["衣類","ズボン ×2〜3"],["衣類","長袖 ×1〜2"],["衣類","パーカー／スウェット ×1"],["衣類","アウター ×1"],["衣類","防水性のある上着"],["衣類","歩きやすい靴"],["衣類","折りたたみ傘"],
+["洗面・衛生","歯ブラシ"],["洗面・衛生","歯磨き粉"],["洗面・衛生","洗顔料"],["洗面・衛生","シャンプー・コンディショナー"],["洗面・衛生","カミソリ"],["洗面・衛生","ティッシュ"],["洗面・衛生","ウェットティッシュ"],["洗面・衛生","ビニール袋"],
+["薬・コンタクト","普段使っている薬"],["薬・コンタクト","必要な常備薬"],["薬・コンタクト","コンタクトレンズ"],["薬・コンタクト","コンタクト用品"],["薬・コンタクト","メガネ"],
+["移動・街歩き","小さめのリュック"],["移動・街歩き","エコバッグ"]
+];
+const packingOptional=[
+["電子機器","Apple Watch等の充電器"],["電子機器","カメラ・予備バッテリー・SDカード"],["衣類","部屋着・寝巻き"],["衣類","帽子"],["衣類","予備の靴"],["衣類","サンダル／ホテル用の履物"],
+["洗面・衛生","ボディソープ"],["洗面・衛生","化粧品・スキンケア用品"],["洗面・衛生","整髪料"],["洗面・衛生","爪切り"],["洗面・衛生","除菌シート"],["洗面・衛生","マスク"],["洗面・衛生","洗濯ネット"],["洗面・衛生","洗濯用洗剤"],
+["薬・コンタクト","酔い止め"],["薬・コンタクト","絆創膏"],["薬・コンタクト","のど飴"],["薬・コンタクト","体温計"],["移動・街歩き","スーツケース用タグ"],["移動・街歩き","折りたたみバッグ"],["移動・街歩き","水筒"],["機内・快適用品","ボールペン"],["機内・快適用品","アイマスク"],["機内・快適用品","ネックピロー"],["機内・快適用品","耳栓"],["その他","小型南京錠"],["その他","荷物の重量計"]
+];
+function packKey(i){return "ukPacking_"+i}
+function renderPacking(){
+ const root=document.getElementById("packingList"); if(!root)return;
+ const groups={}; packingRequired.forEach((x,i)=>{if(!groups[x[0]])groups[x[0]]=[];groups[x[0]].push({x,i})});
+ root.innerHTML=Object.entries(groups).map(([cat,items])=>`<div class="card"><div class="title">${cat}</div>${items.map(({x,i})=>`<label class="task-row"><input type="checkbox" ${localStorage.getItem(packKey(i))==="1"?"checked":""} onchange="togglePacking(${i},this.checked)"><span>${x[1]}</span></label>`).join("")}</div>`).join("");
+}
+function togglePacking(i,checked){localStorage.setItem(packKey(i),checked?"1":"0")}
+function renderOptionalPacking(){
+ const root=document.getElementById("packingOptional"); if(!root)return;
+ const groups={}; packingOptional.forEach(x=>{if(!groups[x[0]])groups[x[0]]=[];groups[x[0]].push(x[1])});
+ root.innerHTML=Object.entries(groups).map(([cat,items])=>`<div class="card"><div class="title">${cat}</div>${items.map(x=>`<div class="optional-item">・${x}</div>`).join("")}</div>`).join("");
+}
+
 function render(){
   const done=tasks.filter((t,i)=>localStorage.getItem(key(i))==="1").length;
   const remain=tasks.length-done;
@@ -238,6 +273,8 @@ function render(){
   try{renderSchedule()}catch(e){console.error("renderSchedule",e)}
   try{renderReservations()}catch(e){console.error("renderReservations",e)}
   try{renderBudget()}catch(e){console.error("renderBudget",e)}
+  try{renderPacking()}catch(e){console.error("renderPacking",e)}
+  try{renderOptionalPacking()}catch(e){console.error("renderOptionalPacking",e)}
   try{renderSettings()}catch(e){console.error("renderSettings",e)}
 }
 function renderTasks(){
