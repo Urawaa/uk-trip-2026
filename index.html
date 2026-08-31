@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#101828">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>UK Trip 2026 v20</title>
+<title>UK Trip 2026 v22</title>
 <style>
 :root{--bg:#f5f6f8;--card:#fff;--text:#172033;--muted:#667085;--line:#e4e7ec;--accent:#172033;--soft:#f8fafc;--ok:#15803d;--danger:#b42318}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif;padding-bottom:86px}
@@ -41,7 +41,12 @@ input,select{width:100%;border:1px solid #d0d5dd;border-radius:10px;background:w
 @media(max-width:430px){.schedule-editor-row{grid-template-columns:56px 1fr}.schedule-editor-actions{grid-column:1/-1;justify-content:flex-start}}
 </style></head>
 <body>
-<header><h1>🇬🇧 UK Trip 2026 v20</h1><div class="sub" id="headerSub">London → Manchester → York</div></header>
+<div class="card" style="margin-top:12px">
+  <h3>旅程更新 v22</h3>
+  <p><strong>Day 4夜にLondon→Liverpoolへ移動。</strong> Day 5〜9はLiverpoolを拠点に観光し、必要ならManchesterを日帰り候補にする。Day 10〜11はYork、Day 12〜13はLondonへ戻って残りの観光を回収、Day 14は帰国。</p>
+</div>
+
+<header><h1>🇬🇧 UK Trip 2026 v22</h1><div class="sub" id="headerSub">London → Liverpool → York</div></header>
 <main>
 
 <section id="home" class="section active">
@@ -66,7 +71,7 @@ input,select{width:100%;border:1px solid #d0d5dd;border-radius:10px;background:w
 </div>
 <div class="card">
   <div class="title">今回の旅の軸</div>
-  <div class="notice">最初の3日は詰め込みすぎず英国・ロンドンに慣れる。Stamford Bridgeは固定イベント候補。大英博物館はまず3時間程度、面白ければ延長。Manchesterにも滞在し、Yorkも候補。</div>
+  <div class="notice">最初の3日は詰め込みすぎず英国・ロンドンに慣れる。Stamford Bridgeは固定イベント候補。大英博物館はまず3時間程度、面白ければ延長。Liverpoolにも滞在し、Yorkも候補。</div>
 </div>
 </section>
 
@@ -153,8 +158,8 @@ input,select{width:100%;border:1px solid #d0d5dd;border-radius:10px;background:w
 <div class="card">
 <div class="day"><h3>Day 1〜3 — London / 慣れる期間</h3><div class="route">Gatwick到着 → 宿 → 周辺散歩 → Westminster等 → Chelsea / Stamford Bridge</div></div>
 <div class="day"><h3>Day 4〜7 — London / 観光</h3><div class="route">大英博物館 → 東側 → Kensington / Notting Hill → 自由日</div></div>
-<div class="day"><h3>Day 8〜10 — Manchester</h3><div class="route">移動 → Manchester中心部 → Old Trafford / 必要ならEtihad → 自由日</div></div>
-<div class="day"><h3>Day 11〜12 — York</h3><div class="route">Manchester → York → York Minster / The Shambles / 旧市街</div></div>
+<div class="day"><h3>Day 5〜9 — Liverpool</h3><div class="route">移動 → Liverpool中心部 → Anfield / Albert Dock → 自由日</div></div>
+<div class="day"><h3>Day 11〜12 — York</h3><div class="route">Liverpool → York → York Minster / The Shambles / 旧市街</div></div>
 <div class="day"><h3>Day 13〜14 — London / 帰国</h3><div class="route">Londonへ戻る → 自由時間 → Gatwickから帰国</div></div>
 </div>
 <div class="card">
@@ -193,7 +198,7 @@ if("caches" in window){
 </script>
 <script>
 const tasks=[
-["出発前","ETA取得","最優先",""],["出発前","パスポート有効期限確認","最優先",""],["出発前","海外旅行保険確認","最優先",""],["出発前","航空券・宿泊予約を保存","高",""],["出発前","eSIM準備","高",""],["出発前","クレジットカード複数枚を準備","高",""],["出発前","現金を少額用意","中",""],["出発前","Google Maps等に場所を保存","中",""],["出発前","Gatwick→Londonの移動方法確認","高",""],["出発前","帰国時のGatwickへの移動方法確認","高",""],["出発前","ロンドンの宿泊先","最優先","Victoria周辺を第一候補"],["出発前","Stamford Bridge Stadium Tour予約","最優先",""],["出発前","Manchesterの宿","高",""],["出発前","Yorkの宿","高",""],["出発前","London→Manchesterの鉄道","高",""],["出発前","Manchester→Yorkの鉄道","中",""],["出発前","York→Londonの鉄道","高",""],["出発前","Manchester United / Cityのスタジアムツアー","中",""],["出発前","Bath / Oxfordの交通","低","行く場合"],
+["出発前","ETA取得","最優先",""],["出発前","パスポート有効期限確認","最優先",""],["出発前","海外旅行保険確認","最優先",""],["出発前","航空券・宿泊予約を保存","高",""],["出発前","eSIM準備","高",""],["出発前","クレジットカード複数枚を準備","高",""],["出発前","現金を少額用意","中",""],["出発前","Google Maps等に場所を保存","中",""],["出発前","Gatwick→Londonの移動方法確認","高",""],["出発前","帰国時のGatwickへの移動方法確認","高",""],["出発前","ロンドンの宿泊先","最優先","Victoria周辺を第一候補"],["出発前","Stamford Bridge Stadium Tour予約","最優先",""],["出発前","Liverpoolの宿","高",""],["出発前","Yorkの宿","高",""],["出発前","London→Liverpoolの鉄道","高",""],["出発前","Liverpool→Yorkの鉄道","中",""],["出発前","York→Londonの鉄道","高",""],["出発前","Liverpool FCのスタジアムツアー","中",""],["出発前","Bath / Oxfordの交通","低","行く場合"],
 ["Day 1","Gatwick到着・入国・荷物受取","最優先",""],["Day 1","Gatwick→London移動","最優先",""],["Day 1","宿に荷物を預ける","最優先",""],["Day 1","eSIM・交通系決済を確認","高",""],["Day 1","周辺を散歩・スーパー確認","中",""],["Day 1","無理せず早めに休む","高",""],
 ["Day 2","Buckingham Palace","高",""],["Day 2","Westminster / Big Ben","高",""],["Day 2","St James's Park","中",""],["Day 2","Trafalgar Square","中",""],["Day 2","Soho / Chinatown","中",""],
 ["Day 3","Kensington周辺","中",""],["Day 3","Stamford Bridge Stadium Tour","最優先","予約時間に合わせる"],["Day 3","Chelsea Megastore","高",""],["Day 3","Fulham / Chelsea周辺散策","中",""],
@@ -201,10 +206,10 @@ const tasks=[
 ["Day 5","St Paul's Cathedral","中",""],["Day 5","Millennium Bridge","中",""],["Day 5","Borough Market","高",""],["Day 5","Tower of London","高",""],["Day 5","Tower Bridge","高",""],
 ["Day 6","Notting Hill","中",""],["Day 6","Kensington / Hyde Park","中",""],["Day 6","Natural History Museum","中",""],
 ["Day 7","ロンドン自由日","高","再訪・買い物・休養"],["Day 7","パブに行く","中",""],
-["Day 8","London→Manchester移動","高",""],["Day 8","Manchester中心部散策","高",""],["Day 8","Northern Quarter","中",""],["Day 8","パブに行く","中",""],
-["Day 9","Old Trafford / Manchester United","高",""],["Day 9","Manchester United Museum","中",""],["Day 9","Manchester市街散策","中",""],
-["Day 10","Manchester自由日","高",""],["Day 10","Etihad Stadium","中",""],["Day 10","Manchester Museum / Science and Industry Museum","低",""],
-["Day 11","Manchester→York移動","中",""],["Day 11","York Minster","高",""],["Day 11","The Shambles","高",""],["Day 11","York旧市街散策","中",""],
+["Day 8","London→Liverpool移動","高",""],["Day 8","Liverpool中心部散策","高",""],["Day 8","Albert Dock / Liverpool ONE","中",""],["Day 8","パブに行く","中",""],
+["Day 9","Anfield / Liverpool FC","高",""],["Day 9","Liverpool FC Museum","中",""],["Day 9","Beatles / Cavern Quarter","中",""],
+["Day 10","Liverpool自由日","高",""],["Day 10","Royal Albert Dock / Maritime Museum","中",""],["Day 10","Museum of Liverpool / 街歩き","低",""],
+["Day 11","Liverpool→York移動","中",""],["Day 11","York Minster","高",""],["Day 11","The Shambles","高",""],["Day 11","York旧市街散策","中",""],
 ["Day 12","York城壁","中",""],["Day 12","York旧市街・自由散策","中",""],["Day 12","York→London移動","高",""],
 ["Day 13","London自由日","高","行き残した場所・再訪・買い物"],["Day 13","帰国準備","高",""],["Day 14","Gatwickへ移動","最優先",""],["Day 14","帰国便チェックイン","最優先",""],["Day 14","忘れ物・パスポート確認","最優先",""]
 ];
@@ -217,10 +222,10 @@ const schedules={
 5:[["10:00","St Paul's Cathedral","","St Paul's Cathedral London"],["11:30","Millennium Bridge","","Millennium Bridge London"],["12:00","Borough Market","昼食","Borough Market London"],["14:00","Tower of London","","Tower of London"],["16:00","Tower Bridge","","Tower Bridge London"],["18:00","Thames","夕方散策",""]],
 6:[["10:00","Notting Hill","","Notting Hill London"],["12:00","昼食","",""],["13:00","Kensington / Hyde Park","","Hyde Park London"],["15:00","Natural History Museum","興味があれば","Natural History Museum London"]],
 7:[["10:00","自由時間","再訪・買い物・休養",""],["18:00","パブ","英国らしい夜を1回入れる",""]],
-8:[["09:00","London→Manchester","鉄道移動",""],["12:00","Manchester中心部","チェックイン・昼食","Manchester UK"],["14:00","Northern Quarter","散策","Northern Quarter Manchester"],["18:00","夕食 / パブ","",""]],
-9:[["10:00","Old Trafford","スタジアムツアー等","Old Trafford Manchester"],["13:00","昼食","",""],["14:00","Manchester United Museum","","Manchester United Museum"],["16:00","Manchester市街","","Manchester UK"]],
-10:[["10:00","Manchester自由日","余裕を持つ",""],["14:00","Etihad Stadium","行く場合","Etihad Stadium Manchester"]],
-11:[["09:30","Manchester→York","鉄道移動",""],["12:00","York Minster","","York Minster UK"],["14:00","The Shambles","","The Shambles York"],["16:00","York旧市街","","York UK"]],
+8:[["09:00","Liverpool観光","中心部・Albert Dock等","Royal Albert Dock Liverpool"],["13:00","昼食","",""],["14:00","Beatles / Cavern Quarter","街歩き","Cavern Quarter Liverpool"],["18:00","夕食 / パブ","",""]],
+9:[["10:00","Anfield","Liverpool FCスタジアムツアー等","Anfield Liverpool"],["13:00","昼食","",""],["14:00","Liverpool FC Museum","見学","Anfield Liverpool"],["16:00","Liverpool市街","自由散策","Liverpool UK"]],
+10:[["10:00","Liverpool自由日","余裕を持つ",""],["13:00","Royal Albert Dock","散策・昼食","Royal Albert Dock Liverpool"],["15:00","Museum of Liverpool","興味があれば","Museum of Liverpool"]],
+11:[["09:30","Liverpool→York","鉄道移動",""],["12:00","York","チェックイン・昼食","York UK"],["14:00","York Minster / The Shambles","旧市街散策","York UK"],["18:00","夕食","",""]],
 12:[["10:00","York城壁","","York City Walls"],["12:00","旧市街・自由散策","","York UK"],["15:00","York→London","鉄道移動",""]],
 13:[["10:00","London自由日","行き残した場所・再訪・買い物","London UK"],["16:00","帰国準備","荷物・空港までの移動を確認",""]],
 14:[["07:00","Gatwickへ移動","時間は帰国便に合わせて変更","Gatwick Airport"],["","","帰国便・チェックイン","Gatwick Airport"]]

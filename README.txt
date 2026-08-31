@@ -1,2 +1,2 @@
-UK Trip 2026 v20
-Daily schedule editor: reorder, edit time/title/details/place, add events, reset per day. Changes save on-device.
+UK Trip 2026 v22
+Major itinerary update: Day 4 evening London->Liverpool; Liverpool Days 5-9; York Days 10-11; London Days 12-13; Day 14 return.
