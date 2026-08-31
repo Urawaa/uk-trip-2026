@@ -1,2 +1,3 @@
-UK Trip 2026 v16
-Bottom navigation changed to two fixed rows (4 items + 3 items), eliminating horizontal scrolling.
+UK Trip 2026 v18
+Corrected trip-day structure: Day 1 outbound travel, Days 2-13 = 12 sightseeing days, Day 14 return travel.
+Day 13 remains a sightseeing day.
