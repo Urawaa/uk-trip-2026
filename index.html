@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#101828">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>UK Trip 2026 v18</title>
+<title>UK Trip 2026 v19</title>
 <style>
 :root{--bg:#f5f6f8;--card:#fff;--text:#172033;--muted:#667085;--line:#e4e7ec;--accent:#172033;--soft:#f8fafc;--ok:#15803d;--danger:#b42318}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif;padding-bottom:86px}
@@ -30,9 +30,18 @@ input,select{width:100%;border:1px solid #d0d5dd;border-radius:10px;background:w
 .amount{font-size:18px;font-weight:700}.yen{font-size:12px;color:var(--muted)}
 .hidden{display:none!important}.chip{display:inline-block;border-radius:99px;background:#eef2f6;padding:5px 8px;font-size:11px;margin:2px}
 </style>
-</head>
+<style>
+.schedule-tools{display:flex;gap:8px;margin:8px 0 12px}
+.schedule-tools button,.schedule-item button{border:1px solid var(--line);background:#fff;border-radius:8px;padding:7px 10px}
+.schedule-item{display:grid;grid-template-columns:72px 1fr auto;gap:8px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
+.schedule-time{font-weight:700}.schedule-title{font-weight:600}.schedule-place{font-size:12px;color:var(--muted)}
+.schedule-actions{display:flex;gap:4px}.schedule-actions button{padding:5px 8px;font-size:12px}
+.schedule-edit{display:grid;gap:8px;grid-column:1/-1;padding:8px 0}
+.schedule-edit input{width:100%;box-sizing:border-box;padding:9px;border:1px solid var(--line);border-radius:8px}
+.schedule-add{margin-top:10px;width:100%;padding:10px;border:1px dashed var(--line);background:#fff;border-radius:8px}
+</style></head>
 <body>
-<header><h1>🇬🇧 UK Trip 2026 v18</h1><div class="sub" id="headerSub">London → Manchester → York</div></header>
+<header><h1>🇬🇧 UK Trip 2026 v19</h1><div class="sub" id="headerSub">London → Manchester → York</div></header>
 <main>
 
 <section id="home" class="section active">
@@ -353,6 +362,54 @@ function initApp(){
 }
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",initApp);
 else initApp();
+
+/* v19: schedule editor */
+(function(){
+const KEY="uk_trip_2026_schedule_v19";
+function esc(s){return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));}
+function saved(){try{return JSON.parse(localStorage.getItem(KEY)||"{}")}catch(e){return {}}}
+function put(day,a){const x=saved();x[String(day)]=a;localStorage.setItem(KEY,JSON.stringify(x));}
+function base(){
+  if(typeof scheduleData!=="undefined")return scheduleData;
+  if(typeof schedules!=="undefined")return schedules;
+  if(typeof dailySchedule!=="undefined")return dailySchedule;
+  return {};
+}
+function day(){
+ const m=(location.hash||"").match(/day(?:=|-)?(\d+)/i);
+ return m?+m[1]:1;
+}
+function data(d){
+ const s=saved()[String(d)];
+ if(Array.isArray(s))return s;
+ const b=base()[String(d)];
+ return Array.isArray(b)?b.map(x=>Array.isArray(x)?x.slice():x):[];
+}
+function renderEditor(){
+ const r=document.getElementById("scheduleEditor");if(!r)return;
+ const d=day(),a=data(d);
+ r.innerHTML='<div class="schedule-tools"><button id="sr">元の予定に戻す</button></div>'+
+ a.map((x,i)=>`<div class="schedule-item" data-i="${i}">
+ <div class="schedule-time">${esc(x[0])}</div>
+ <div><div class="schedule-title">${esc(x[1])}</div><div class="schedule-place">${esc(x[2])}${x[3]?' · '+esc(x[3]):''}</div></div>
+ <div class="schedule-actions"><button data-u="${i}" ${i?'':'disabled'}>↑</button><button data-d="${i}" ${i<a.length-1?'':'disabled'}>↓</button><button data-e="${i}">編集</button></div></div>`).join("")+
+ '<button class="schedule-add" id="sa">＋ 予定を追加</button>';
+ r.querySelector("#sr").onclick=()=>{let x=saved();delete x[String(d)];localStorage.setItem(KEY,JSON.stringify(x));renderEditor();};
+ r.querySelectorAll("[data-u]").forEach(b=>b.onclick=()=>move(d,+b.dataset.u,-1));
+ r.querySelectorAll("[data-d]").forEach(b=>b.onclick=()=>move(d,+b.dataset.d,1));
+ r.querySelectorAll("[data-e]").forEach(b=>b.onclick=()=>edit(d,+b.dataset.e));
+ r.querySelector("#sa").onclick=()=>{let x=data(d);x.push(["","新しい予定","",""]);put(d,x);renderEditor();edit(d,x.length-1)};
+}
+function move(d,i,k){let a=data(d),j=i+k;if(j<0||j>=a.length)return;[a[i],a[j]]=[a[j],a[i]];put(d,a);renderEditor();}
+function edit(d,i){
+ const r=document.getElementById("scheduleEditor"),a=data(d),x=a[i]||["","","",""],row=r.querySelector(`[data-i="${i}"]`);
+ row.insertAdjacentHTML("afterend",`<div class="schedule-edit" id="se"><input id="t" value="${esc(x[0])}" placeholder="時刻 例：16:30"><input id="n" value="${esc(x[1])}" placeholder="予定名"><input id="q" value="${esc(x[2])}" placeholder="詳細"><input id="p" value="${esc(x[3])}" placeholder="場所（任意）"><div><button id="save">保存</button> <button id="cancel">キャンセル</button></div></div>`);
+ r.querySelector("#save").onclick=()=>{a[i]=[r.querySelector("#t").value,r.querySelector("#n").value,r.querySelector("#q").value,r.querySelector("#p").value];put(d,a);renderEditor();};
+ r.querySelector("#cancel").onclick=renderEditor;
+}
+window.addEventListener("hashchange",()=>setTimeout(renderEditor,50));
+setTimeout(renderEditor,100);
+})();
 </script>
 </body>
 </html>
