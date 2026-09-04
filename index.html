@@ -170,6 +170,10 @@ input,select{width:100%;border:1px solid #d0d5dd;border-radius:10px;background:w
 <div class="title">設定</div>
 <label>出発日</label><input id="departureDate" type="date" onchange="saveSettings()">
 <label>旅行日数</label><input id="tripDays" type="number" min="1" max="30" onchange="saveSettings()">
+<label>ホームに表示する「今日のDay」</label><select id="currentDaySetting" onchange="saveCurrentDay()">
+<option value="1">Day 1</option><option value="2">Day 2</option><option value="3">Day 3</option><option value="4">Day 4</option><option value="5">Day 5</option><option value="6">Day 6</option><option value="7">Day 7</option><option value="8">Day 8</option><option value="9">Day 9</option><option value="10">Day 10</option><option value="11">Day 11</option><option value="12">Day 12</option><option value="13">Day 13</option><option value="14">Day 14</option>
+</select>
+<div class="small" style="margin-top:6px">「今日の予定」がDay 1のまま等、日付判定がずれた場合はここから手動で変更できます。</div>
 <div class="row" style="margin-top:10px"><button class="primary" onclick="saveSettings()">保存</button><button class="secondary" onclick="resetApp()">アプリデータをリセット</button></div>
 <div class="small" style="margin-top:8px">チェック状態・予約・支出・設定はこのiPhoneのブラウザ内に保存されます。</div>
 </div>
@@ -397,7 +401,20 @@ function saveSettings(){
  const d=document.getElementById("departureDate").value,days=document.getElementById("tripDays").value||14;
  if(d)localStorage.setItem("ukDeparture",d);localStorage.setItem("ukTripDays",days);render();
 }
-function renderSettings(){document.getElementById("departureDate").value=localStorage.getItem("ukDeparture")||"";document.getElementById("tripDays").value=localStorage.getItem("ukTripDays")||14}
+function renderSettings(){
+ document.getElementById("departureDate").value=localStorage.getItem("ukDeparture")||"";
+ document.getElementById("tripDays").value=localStorage.getItem("ukTripDays")||14;
+ const cur=document.getElementById("currentDaySetting");
+ if(cur)cur.value=localStorage.getItem("ukCurrentDay")||"1";
+}
+function saveCurrentDay(){
+ const v=document.getElementById("currentDaySetting")?.value||"1";
+ localStorage.setItem("ukCurrentDay",v);
+ const sel=document.getElementById("daySelect");
+ if(sel)sel.value=v;
+ renderHome();
+ renderSchedule();
+}
 function resetApp(){if(confirm("チェック・予約・支出・設定をすべて削除します。よろしいですか？")){Object.keys(localStorage).filter(k=>k.startsWith("uk")).forEach(k=>localStorage.removeItem(k));reservations=[];expenses=[];render()}}
 function initApp(){
   if(!localStorage.getItem("ukDeparture")) localStorage.setItem("ukDeparture","2026-08-30");
