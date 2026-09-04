@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#101828">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>UK Trip 2026 v24</title>
+<title>UK Trip 2026 v26</title>
 <style>
 :root{--bg:#f5f6f8;--card:#fff;--text:#172033;--muted:#667085;--line:#e4e7ec;--accent:#172033;--soft:#f8fafc;--ok:#15803d;--danger:#b42318}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif;padding-bottom:86px}
@@ -42,11 +42,11 @@ input,select{width:100%;border:1px solid #d0d5dd;border-radius:10px;background:w
 </style></head>
 <body>
 <div class="card" style="margin-top:12px">
-  <h3>旅程更新 v22</h3>
-  <p><strong>Day 4夜にLondon→Liverpoolへ移動。</strong> Day 5〜9はLiverpoolを拠点に観光し、必要ならManchesterを日帰り候補にする。Day 10〜11はYork、Day 12〜13はLondonへ戻って残りの観光を回収、Day 14は帰国。</p>
+  <h3>旅程更新 v26</h3>
+  <p><strong>9/5〜9/12をChelsea戦・Liverpool・Oxford中心に再編。</strong> Manchester・Yorkは今回は見送り。9/9のChelsea vs Leeds観戦を固定イベントにして、9/7は大英博物館を丸一日、9/8はCity of London周辺、9/10はOxford日帰り、9/11は最終観光＋お土産のあとGatwick空港泊にする。</p>
 </div>
 
-<header><h1>🇬🇧 UK Trip 2026 v24</h1><div class="sub" id="headerSub">London → Liverpool → York</div></header>
+<header><h1>🇬🇧 UK Trip 2026 v26</h1><div class="sub" id="headerSub">London → Liverpool → Oxford → London</div></header>
 <main>
 
 <section id="home" class="section active">
@@ -71,13 +71,13 @@ input,select{width:100%;border:1px solid #d0d5dd;border-radius:10px;background:w
 </div>
 <div class="card">
   <div class="title">今回の旅の軸</div>
-  <div class="notice">最初の3日は詰め込みすぎず英国・ロンドンに慣れる。Stamford Bridgeは固定イベント候補。大英博物館はまず3時間程度、面白ければ延長。Liverpoolにも滞在し、Yorkも候補。</div>
+  <div class="notice">Chelsea戦を旅の軸にしつつ、LiverpoolとOxfordでロンドン以外も楽しむ。9/9はChelsea vs Leeds、9/10はOxford日帰り。9/11夜はGatwick South Terminalへ移動して空港泊、9/12は11:00発のChina Southern航空で帰国。</div>
 </div>
 </section>
 
 <section id="tasks" class="section">
 <div class="title">チェックリスト</div>
-<div class="small">Day 1＝移動、Day 2〜13＝12日間の観光、Day 14＝帰国移動として整理しています。</div>
+<div class="small">Day 1〜13＝現地旅程、Day 14＝帰国移動として整理しています。</div>
 <div class="card" style="margin-top:12px">
   <div class="title">全体の進捗</div>
   <div class="progress"><div id="taskBar" class="bar"></div></div>
@@ -156,11 +156,15 @@ input,select{width:100%;border:1px solid #d0d5dd;border-radius:10px;background:w
 <div id="trip" class="section">
 <div class="title">2週間プラン</div>
 <div class="card">
-<div class="day"><h3>Day 1〜4 — London / 王道＋観光</h3><div class="route">Gatwick到着 → Westminster / Buckingham Palace → Chelsea / Stamford Bridge → 大英博物館・東側 → Day 4夜にLiverpoolへ移動</div></div>
-<div class="day"><h3>Day 5〜9 — Liverpool / 街・サッカー・Beatles</h3><div class="route">Liverpool中心部 → Albert Dock → Anfield / Liverpool FC → Beatles / Cavern Quarter → 自由日 → Manchester日帰り候補</div></div>
-<div class="day"><h3>Day 10〜11 — York / 旧市街</h3><div class="route">Liverpool → York → York Minster / The Shambles / 城壁・旧市街</div></div>
-<div class="day"><h3>Day 12〜13 — London / 回収・自由時間</h3><div class="route">York → London → 未訪問スポット回収 → 買い物・自由時間 → Arsenal vs Chelseaをパブ等で観戦する場合</div></div>
-<div class="day"><h3>Day 14 — 帰国</h3><div class="route">London → Gatwick → 日本</div></div>
+<div class="day"><h3>Day 1〜6 — London前半</h3><div class="route">London到着 → Imperial War Museum → Buckingham Palace → Westminster / Soho → Chelsea / Stamford Bridge → 9/4 Liverpoolへ</div></div>
+<div class="day"><h3>Day 7 — 9/5 Liverpool</h3><div class="route">The Beatles → Cavern Quarter → Anfield。Liverpoolをメイン観光。</div></div>
+<div class="day"><h3>Day 8 — 9/6 Liverpool → London</h3><div class="route">午前ゆっくり → 昼過ぎに鉄道でLondon → 16:30 Chelsea vs Arsenalをパブ観戦 → ホテル泊</div></div>
+<div class="day"><h3>Day 9 — 9/7 British Museum</h3><div class="route">大英博物館を丸一日。休憩を挟みながら重点展示を見る。</div></div>
+<div class="day"><h3>Day 10 — 9/8 City of London</h3><div class="route">Tower of London → Tower Bridge → Millennium Bridge → St Paul's Cathedral</div></div>
+<div class="day"><h3>Day 11 — 9/9 Chelsea vs Leeds</h3><div class="route">昼間は休養 → Stamford Bridge → 20:00 Chelsea vs Leeds観戦 → ホテル泊</div></div>
+<div class="day"><h3>Day 12 — 9/10 Oxford日帰り</h3><div class="route">Oxford大学街 → Bodleian Library / Radcliffe Camera → Christ Church → Harry Potterロケ地 → London帰還</div></div>
+<div class="day"><h3>Day 13 — 9/11 London最終日＋Gatwick空港泊</h3><div class="route">Covent Garden / Soho → お土産・買い物 → 最後の夕食 → 21時頃Gatwick South Terminalへ → 空港泊</div></div>
+<div class="day"><h3>Day 14 — 9/12 帰国</h3><div class="route">China Southern CZ5094、London Gatwick South Terminal 11:00発 → Guangzhou</div></div>
 </div>
 <div class="card">
 <div class="title">設定</div>
@@ -173,7 +177,7 @@ input,select{width:100%;border:1px solid #d0d5dd;border-radius:10px;background:w
 <div class="title">旅行中モード</div>
 <div class="notice">旅行中は「今日の予定」と「チェックリスト」を中心に使う想定。住所や施設名の「地図」ボタンからGoogle Mapsを開けます。</div>
 </div>
-</section>
+</div>
 
 </main>
 <nav id="appNav">
@@ -199,65 +203,70 @@ if("caches" in window){
 <script>
 const tasks = [
 ["Day 1","London到着・移動","ガトウィック→London、ホテルへ",""],
-["Day 1","Imperial War Museum","時間があれば立ち寄る","Imperial War Museum London"],
-["Day 1","Buckingham Palace","16:30〜16:45入場","Buckingham Palace"],
+["Day 1","Imperial War Museum","見学","Imperial War Museum London"],
+["Day 1","Buckingham Palace","予約入場","Buckingham Palace"],
 ["Day 1","夕食","ホテル周辺で夕食",""],
 ["Day 2","Westminster","Big Ben / Westminster周辺","Westminster London"],
 ["Day 2","Trafalgar Square","街歩き","Trafalgar Square London"],
 ["Day 2","Soho / Chinatown","夕方〜夜の街歩き","Soho London"],
 ["Day 3","Chelsea","Chelsea周辺散策","Chelsea London"],
 ["Day 3","Natural History Museum","見学","Natural History Museum London"],
-["Day 3","Stamford Bridge","Chelsea FCスタジアムツアー等","Stamford Bridge London"],
+["Day 3","Stamford Bridge","Chelsea FCスタジアムツアー","Stamford Bridge London"],
 ["Day 3","Fulham","街歩き・夕食","Fulham London"],
-["Day 4","St Paul's Cathedral","見学","St Paul's Cathedral London"],
-["Day 4","Millennium Bridge","散策","Millennium Bridge London"],
-["Day 4","Borough Market","昼食・散策","Borough Market London"],
-["Day 4","Tower of London","見学","Tower of London"],
-["Day 4","Tower Bridge","散策","Tower Bridge London"],
-["Day 4","Liverpoolへ移動","夕食後に鉄道移動・チェックイン","Liverpool UK"],
-["Day 5","Liverpool中心部","市街散策","Liverpool UK"],
-["Day 5","Albert Dock","散策","Royal Albert Dock Liverpool"],
-["Day 5","Beatles / Cavern Quarter","街歩き","Cavern Quarter Liverpool"],
-["Day 6","Anfield","Liverpool FCスタジアムツアー等","Anfield Liverpool"],
-["Day 6","Liverpool FC Museum","見学","Anfield Liverpool"],
-["Day 6","Liverpool市街","自由散策","Liverpool UK"],
-["Day 7","Liverpool自由日","余裕を持って観光","Liverpool UK"],
-["Day 7","Beatles関連","興味に応じて","Liverpool UK"],
-["Day 8","Manchester日帰り","行く場合の候補","Manchester UK"],
-["Day 8","Manchester市街","Northern Quarter等","Manchester UK"],
-["Day 8","Liverpoolへ戻る","夕方〜夜","Liverpool UK"],
-["Day 9","Liverpool予備日","買い物・街歩き・休養","Liverpool UK"],
-["Day 10","Liverpool→York","鉄道移動","York UK"],
-["Day 10","York Minster","見学","York Minster"],
-["Day 10","The Shambles","旧市街散策","The Shambles York"],
-["Day 11","York自由日","城壁・旧市街など","York UK"],
-["Day 12","York→London","鉄道移動","London UK"],
-["Day 12","London自由枠","未訪問エリア回収","London UK"],
-["Day 13","London自由日","残りの観光・買い物","London UK"],
-["Day 13","Arsenal vs Chelsea","パブ等で観戦する場合","London UK"],
-["Day 14","帰国","London→空港→日本",""]
+["Day 7","The Beatles","The Beatles Story / Beatles関連","Liverpool UK"],
+["Day 7","Cavern Quarter","Cavern Club周辺を散策","Cavern Quarter Liverpool"],
+["Day 7","Anfield","Liverpool FC・スタジアム周辺。必要ならツアー","Anfield Liverpool"],
+["Day 7","Liverpool中心部","無理せず街歩き","Liverpool UK"],
+["Day 8","Liverpool→London","昼過ぎの鉄道で移動","Liverpool Lime Street"],
+["Day 8","Chelsea vs Arsenal","16:30 パブで観戦","London UK"],
+["Day 8","Londonホテル","ホテル泊開始","London UK"],
+["Day 9","British Museum","丸一日かけて重点的に見学","British Museum London"],
+["Day 9","休憩・昼食","館内外で適宜休憩","British Museum London"],
+["Day 10","Tower of London","見学","Tower of London"],
+["Day 10","Tower Bridge","橋・テムズ川沿い","Tower Bridge London"],
+["Day 10","Millennium Bridge","散策","Millennium Bridge London"],
+["Day 10","St Paul's Cathedral","見学","St Paul's Cathedral London"],
+["Day 11","Chelsea vs Leeds","20:00 Stamford Bridgeで観戦","Stamford Bridge London"],
+["Day 11","ホテル","試合後ホテルへ","London UK"],
+["Day 12","Oxford日帰り","Londonから鉄道で日帰り","Oxford UK"],
+["Day 12","University of Oxford","大学街を散策","University of Oxford"],
+["Day 12","Bodleian Library / Radcliffe Camera","歴史的建築を見る","Oxford UK"],
+["Day 12","Christ Church","見学・ハリポタ関連","Christ Church Oxford"],
+["Day 12","Oxford→London","夕方〜夜に戻る","Oxford UK"],
+["Day 13","Covent Garden / Soho","最終日の街歩き","Covent Garden London"],
+["Day 13","お土産・買い物","Regent Street / Oxford Street等","London UK"],
+["Day 13","最後の夕食","London最後の夜","London UK"],
+["Day 13","Gatwickへ移動","夜に空港へ。China SouthernはSouth Terminal","Gatwick South Terminal"],
+["Day 13","Gatwick空港泊","翌朝のフライトに備える","Gatwick South Terminal"],
+["Day 14","帰国","11:00 London Gatwick発・China Southern CZ5094","Gatwick South Terminal"]
 ];
 
 const schedules = {
 1:[["06:30","ガトウィック到着","入国・荷物回収","Gatwick Airport"],["09:00","Londonへ移動","鉄道移動","London"],["11:00","ホテル周辺","荷物を預ける・昼食","Elephant & Castle London"],["13:00","Imperial War Museum","見学","Imperial War Museum London"],["16:30","Buckingham Palace","予約入場","Buckingham Palace"],["19:00","夕食","ホテル周辺","Elephant & Castle London"]],
-2:[["09:30","Westminster","Big Ben / Westminster","Westminster London"],["12:00","昼食","",""],["13:00","Trafalgar Square","散策","Trafalgar Square London"],["15:00","Soho / Chinatown","街歩き","Soho London"],["18:30","夕食","",""]],
-3:[["09:30","Chelsea","Chelsea周辺","Chelsea London"],["11:00","Natural History Museum","見学","Natural History Museum London"],["14:00","Stamford Bridge","Chelsea FCスタジアムツアー等","Stamford Bridge London"],["17:00","Fulham","散策・夕食","Fulham London"]],
+2:[["09:30","Westminster","Big Ben / Westminster","Westminster London"],["12:00","昼食","",""] ,["13:00","Trafalgar Square","散策","Trafalgar Square London"],["15:00","Soho / Chinatown","街歩き","Soho London"],["18:30","夕食","",""]],
+3:[["09:30","Chelsea","Chelsea周辺","Chelsea London"],["11:00","Natural History Museum","見学","Natural History Museum London"],["14:00","Stamford Bridge","Chelsea FCスタジアムツアー","Stamford Bridge London"],["17:00","Fulham","散策・夕食","Fulham London"]],
 4:[["09:30","St Paul's Cathedral","見学","St Paul's Cathedral London"],["11:30","Millennium Bridge","散策","Millennium Bridge London"],["12:30","Borough Market","昼食・散策","Borough Market London"],["14:30","Tower of London","見学","Tower of London"],["17:00","Tower Bridge","散策","Tower Bridge London"],["19:00","夕食","Londonで最後の夕食","London"],["20:30","Liverpoolへ移動","鉄道・ホテルチェックイン","Liverpool UK"]],
 5:[["09:30","Liverpool中心部","市街散策","Liverpool UK"],["11:30","Albert Dock","散策","Royal Albert Dock Liverpool"],["14:00","Beatles / Cavern Quarter","街歩き","Cavern Quarter Liverpool"],["18:00","夕食 / パブ","","Liverpool UK"]],
-6:[["10:00","Anfield","スタジアムツアー等","Anfield Liverpool"],["13:00","昼食","",""],["14:00","Liverpool FC Museum","見学","Anfield Liverpool"],["16:00","Liverpool市街","自由散策","Liverpool UK"],["19:00","夕食 / パブ","",""]],
-7:[["10:00","Liverpool自由日","余裕を持つ","Liverpool UK"],["13:00","Beatles関連","興味に応じて","Liverpool UK"],["16:00","Liverpool中心部","買い物・街歩き","Liverpool UK"]],
-8:[["08:00","Liverpool→Manchester","日帰り移動","Manchester UK"],["09:30","Manchester市街","Northern Quarter等","Manchester UK"],["13:00","昼食","","Manchester UK"],["14:00","Manchester自由散策","興味に応じて","Manchester UK"],["18:00","Manchester→Liverpool","戻る","Liverpool UK"]],
-9:[["10:00","Liverpool予備日","休養・買い物・街歩き","Liverpool UK"],["14:00","Albert Dock / Liverpool ONE","散策","Liverpool UK"],["18:00","夕食 / パブ","",""]],
-10:[["09:30","Liverpool→York","鉄道移動","York UK"],["12:00","York","チェックイン・昼食","York UK"],["14:00","York Minster","見学","York Minster"],["16:00","The Shambles","旧市街散策","The Shambles York"],["18:00","夕食","",""]],
-11:[["10:00","York自由日","城壁・旧市街","York UK"],["13:00","昼食","",""],["14:00","York市街","自由散策","York UK"],["18:00","夕食","",""]],
-12:[["09:30","York→London","鉄道移動","London UK"],["13:00","London","ホテルチェックイン・昼食","London UK"],["15:00","London自由枠","未訪問エリア回収","London UK"],["19:00","夕食","",""]],
-13:[["10:00","London自由日","残りの観光・買い物","London UK"],["15:00","自由時間","旅程調整","London UK"],["16:30","Arsenal vs Chelsea","パブ等で観戦する場合","London UK"],["19:00","夕食","",""]],
-14:[["08:00","ホテル出発","空港へ移動","London UK"],["","空港","チェックイン・出国",""],["","帰国","日本へ",""]]
+6:[["10:00","Anfield","スタジアムツアー等","Anfield Liverpool"],["13:00","昼食","",""] ,["14:00","Liverpool FC Museum","見学","Anfield Liverpool"],["16:00","Liverpool市街","自由散策","Liverpool UK"],["19:00","夕食 / パブ","",""]],
+7:[["10:00","The Beatles Story","Beatlesを中心に観光","The Beatles Story Liverpool"],["12:30","昼食","Albert Dock周辺","Royal Albert Dock Liverpool"],["14:00","Cavern Quarter","Cavern Club周辺を散策","Cavern Quarter Liverpool"],["16:30","Anfield","Liverpool FC・スタジアム周辺。ツアー予約があれば優先","Anfield Liverpool"],["19:30","夕食 / パブ","疲れたら早めに終了","Liverpool UK"]],
+8:[["10:00","Liverpoolでゆっくり","荷物整理・朝食・休憩","Liverpool UK"],["12:30","Liverpool Lime Street","駅へ移動","Liverpool Lime Street"],["13:00","Liverpool→London","昼過ぎの鉄道","Liverpool Lime Street"],["15:30","London到着・ホテル","チェックイン／休憩","London UK"],["16:30","Chelsea vs Arsenal","パブで観戦","London UK"],["19:00","夕食","観戦後は無理せずホテルへ","London UK"]],
+9:[["10:00","British Museum","丸一日。気になる展示を重点的に","British Museum London"],["13:00","昼食・休憩","館内外で適宜休憩","British Museum London"],["14:00","British Museum","午後もゆっくり見学","British Museum London"],["17:00","夕方","早めに切り上げて休憩","London UK"],["19:00","夕食","","London UK"]],
+10:[["09:30","Tower of London","見学","Tower of London"],["12:00","昼食","Tower周辺","London UK"],["13:00","Tower Bridge","橋・テムズ川沿い","Tower Bridge London"],["14:30","Millennium Bridge","散策","Millennium Bridge London"],["15:00","St Paul's Cathedral","見学","St Paul's Cathedral London"],["17:30","City of London","余力があれば散策","London UK"],["19:00","夕食","","London UK"]],
+11:[["10:30","Chelsea周辺","昼まで休養・昼食","Chelsea London"],["14:00","休憩","試合に備えてホテル等で休む","London UK"],["18:30","Stamford Bridgeへ","早めにスタジアムへ","Stamford Bridge London"],["20:00","Chelsea vs Leeds","観戦","Stamford Bridge London"],["22:15","ホテルへ","試合後は無理せず帰宿","London UK"]],
+12:[["08:00","London→Oxford","鉄道で日帰り","London UK"],["09:30","Oxford到着","中心部へ","Oxford UK"],["10:00","University of Oxford","大学街を散策","University of Oxford"],["11:30","Bodleian Library / Radcliffe Camera","歴史的建築","Oxford UK"],["13:00","昼食","Oxford中心部","Oxford UK"],["14:00","Christ Church","見学・ハリポタ関連","Christ Church Oxford"],["15:30","Harry Potterロケ地・街歩き","Oxfordのロケ地を散策","Oxford UK"],["17:30","Oxford→London","夕方〜夜に戻る","Oxford UK"],["19:00","ホテル","休憩・夕食","London UK"]],
+13:[["10:00","Covent Garden","最終日の街歩き","Covent Garden London"],["12:00","昼食","",""] ,["13:00","Soho / Chinatown","最後のロンドン散策","Soho London"],["15:00","お土産・買い物","Regent Street / Oxford Street等","London UK"],["18:00","最後の夕食","荷物整理も含めて余裕を持つ","London UK"],["21:00","London→Gatwick","夜に空港へ移動","Gatwick South Terminal"],["22:30","Gatwick空港泊","China SouthernはSouth Terminal","Gatwick South Terminal"]],
+14:[["07:00","起床・出発準備","空港内で朝食など","Gatwick South Terminal"],["08:00","チェックイン・保安検査","余裕を持って出発手続き","Gatwick South Terminal"],["11:00","China Southern CZ5094","Gatwick → Guangzhou","Gatwick South Terminal"]]
 };
 
 let reservations=JSON.parse(localStorage.getItem("ukReservations")||"[]");
 let expenses=JSON.parse(localStorage.getItem("ukExpenses")||"[]");
 
+const TASK_SCHEMA="v26";
+if(localStorage.getItem("ukTaskSchema")!==TASK_SCHEMA){
+  Object.keys(localStorage).filter(k=>k.startsWith("ukTask_")).forEach(k=>localStorage.removeItem(k));
+  localStorage.removeItem("ukEditableSchedules");
+  localStorage.setItem("ukTaskSchema",TASK_SCHEMA);
+}
 function key(i){return "ukTask_"+i}
 function getRate(){return Number(localStorage.getItem("ukRate")||195)}
 function saveRate(){localStorage.setItem("ukRate",document.getElementById("rate").value||195)}
@@ -391,6 +400,9 @@ function saveSettings(){
 function renderSettings(){document.getElementById("departureDate").value=localStorage.getItem("ukDeparture")||"";document.getElementById("tripDays").value=localStorage.getItem("ukTripDays")||14}
 function resetApp(){if(confirm("チェック・予約・支出・設定をすべて削除します。よろしいですか？")){Object.keys(localStorage).filter(k=>k.startsWith("uk")).forEach(k=>localStorage.removeItem(k));reservations=[];expenses=[];render()}}
 function initApp(){
+  if(!localStorage.getItem("ukDeparture")) localStorage.setItem("ukDeparture","2026-08-30");
+  if(!localStorage.getItem("ukTripDays")) localStorage.setItem("ukTripDays","14");
+  if(!localStorage.getItem("ukCurrentDay")) localStorage.setItem("ukCurrentDay","4");
   render();
 }
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",initApp);
